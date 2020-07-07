@@ -20,21 +20,24 @@ function getToken(authorization){
 
 function decodeHeader(req){
   const authorization = req.headers.authorization || '';
-  console.log(`authorization: ${authorization}`);
   const token = getToken(authorization);
   const decoded = verify(token);
-
-  req.user.decoded = decoded;
+  
+  req.user = decoded;
   return decoded;
 }
 
 const check = {
   own: function(req, owner){
     const decoded = decodeHeader(req);
-    console.log(decoded);
+
+    if(decoded.id !== owner){
+      throw new Error('Not Authorized')
+    }
   }
 }
 
 module.exports = {
-  sign
+  sign,
+  check
 }
