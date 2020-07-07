@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const error = require('../utils/error');
+
 const secret = config.jwt.secret;
 
 function sign(data){
@@ -22,7 +24,7 @@ function decodeHeader(req){
   const authorization = req.headers.authorization || '';
   const token = getToken(authorization);
   const decoded = verify(token);
-  
+
   req.user = decoded;
   return decoded;
 }
@@ -32,7 +34,7 @@ const check = {
     const decoded = decodeHeader(req);
 
     if(decoded.id !== owner){
-      throw new Error('Not Authorized')
+      throw error('Not Authorized', 401);
     }
   }
 }
