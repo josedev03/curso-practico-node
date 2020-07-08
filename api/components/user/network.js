@@ -13,24 +13,20 @@ router.put('/', secureMiddleware('update'), upsert)
 
 // internal functions
 
-function list(req, res){
+function list(req, res, next){
   controller.list()
     .then((lista) => {
       response.success(req, res, lista, 200);
     })
-    .catch((err) =>{
-      response.error(req, res, err.message, 500)
-    })
+    .catch(next)
 }
 
-function get(req, res){
+function get(req, res, next){
   controller.get()
     .then((user) =>{
       response.success(req, res, user, 200);
     })
-    .catch((err) => {
-      response.error(req, res, err.message, 500)
-    })
+    .catch(next)
 }
 
 function upsert(req, res){
@@ -38,9 +34,7 @@ function upsert(req, res){
     .then((user) => {
       response.success(req, res, user, 201);
     })
-    .catch((err) => {
-      response.error(req, res, err.message, 500)
-    })
+    .catch(next)
 }
 
 
