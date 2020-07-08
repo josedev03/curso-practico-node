@@ -7,7 +7,7 @@ module.exports = function(injectedStore){
   let store = injectedStore
 
   if(!injectedStore){
-    injectedStore = require('../../../store/dummy')
+    injectedStore = require('../../../store/mysql')
   }
 
   function list(){

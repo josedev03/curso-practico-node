@@ -22,21 +22,19 @@ function list(req, res, next){
 }
 
 function get(req, res, next){
-  controller.get()
+  controller.get(req.params.id)
     .then((user) =>{
       response.success(req, res, user, 200);
     })
     .catch(next)
 }
 
-function upsert(req, res){
+function upsert(req, res, next){
   controller.upsert(req.body)
     .then((user) => {
       response.success(req, res, user, 201);
     })
     .catch(next)
 }
-
-
 
 module.exports = router;
