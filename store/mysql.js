@@ -85,8 +85,7 @@ function query(table, query){
 }
 
 async function upsert(table, data){
-  const row = await get(table, data.id);
-  if(row.lenght === 0){
+  if(data && data.id){
     return update(table, data);
   } else {
     return insert(table, data);

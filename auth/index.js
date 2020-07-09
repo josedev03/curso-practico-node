@@ -36,6 +36,9 @@ const check = {
     if(decoded.id !== owner){
       throw error('Not Authorized', 401);
     }
+  },
+  logged: function(req){
+    const decoded = decodeHeader(req);
   }
 }
 

@@ -2,6 +2,7 @@ const {nanoid} = require('nanoid')
 const auth = require('../auth')
 
 const TABLA = 'user'
+const TABLEFOLLOW = 'user_follow';
 
 module.exports = function(injectedStore){
   let store = injectedStore
@@ -42,9 +43,24 @@ module.exports = function(injectedStore){
     return store.upsert(TABLA, user)
   }
 
+  function follow(from, to){
+    return store.upsert(TABLEFOLLOW, {
+      user_from: from,
+      user_to: to
+    })
+  }
+
+  function getFollow(from){
+    return store.query(TABLEFOLLOW, {
+      user_from: from
+    })
+  }
+
   return {
     list,
     get,
-    upsert
+    upsert,
+    follow,
+    getFollow
   }
 }
