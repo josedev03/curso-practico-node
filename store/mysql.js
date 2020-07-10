@@ -74,9 +74,19 @@ function update(table, data){
   })
 }
 
-function query(table, query){
+function query(table, query, join){
+  let joinQuery = '';
+  if(join){
+    const key = Object.keys(join)[0];
+    const val = join[key];
+    joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`
+  }
+
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, result) => {
+    const sql = `SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`;
+    console.log(sql)
+    console.log(query)
+    connection.query(sql, query, (err, result) => {
       if(err) return reject(err);
 
       resolve(result[0] || null);
@@ -85,11 +95,12 @@ function query(table, query){
 }
 
 async function upsert(table, data){
-  if(data && data.id){
-    return update(table, data);
-  } else {
-    return insert(table, data);
-  }
+  return new Promise((resolve, reject) => {
+    connection.query(`INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`, [data, data], (error, result) => {
+      if (error) { return reject(error) }
+      resolve(result)
+    })
+  })
 }
 
 module.exports = {
