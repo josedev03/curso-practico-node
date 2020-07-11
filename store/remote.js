@@ -20,7 +20,6 @@ function createRemoteDB(host, port){
     } else{
       body = JSON.parse(data);
     }
-    console.log(`url ${url}`)
     
     return new Promise((resolve, reject) => {
       request({
