@@ -1,13 +1,13 @@
 {
   "version": 2,
   "env": {
-    "API_PORT": ""
-    "MYSQL_HOST": "remotemysql",
+    "API_PORT": "",
+    "MYSQL_HOST": "@mysql_host",
     "MYSQL_USER": "Ln4iMlbObf",
     "MYSQL_PASS": "9fM1MC3imd",
     "MYSQL_DB": "Ln4iMlbObf",
-    "MYSQL_PORT": "3306",
-  }
+    "MYSQL_PORT": "3306"
+  },
   "builds": [
     {
       "src": "api/index.js",
