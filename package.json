@@ -18,7 +18,8 @@
   "scripts": {
     "dev": "nodemon api/index.js",
     "db": "nodemon mysql/index.js",
-    "post": "nodemon post/index-post.js"
+    "post": "nodemon post/index-post.js",
+    "cache": "nodemon cache/index-cache.js"
   },
   "keywords": [],
   "author": "",
