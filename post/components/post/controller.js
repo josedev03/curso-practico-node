@@ -1,5 +1,3 @@
-const auth = require('../auth')
-
 const TABLA = 'post'
 
 module.exports = function(injectedStore){

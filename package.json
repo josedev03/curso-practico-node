@@ -16,7 +16,8 @@
   "devDependencies": {},
   "scripts": {
     "dev": "nodemon api/index.js",
-    "db": "nodemon mysql/index.js"
+    "db": "nodemon mysql/index.js",
+    "post": "nodemon post/index.js"
   },
   "keywords": [],
   "author": "",
