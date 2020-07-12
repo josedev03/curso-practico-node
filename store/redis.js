@@ -13,7 +13,10 @@ function list(table){
     client.get(table, (err, data) =>{
       if(err) return reject(err)
 
-      let res = JSON.stringify(data) || null
+      let res = data || null;
+      if(data){
+        res = JSON.parse(data) || null
+      }
       resolve(res)
     })
   })
